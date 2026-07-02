@@ -6,6 +6,16 @@ import { Footer } from "@/components/Footer";
 import { logoBase64 } from "@/assets/logo";
 
 export const Route = createFileRoute("/about")({
+  head: () => ({
+    meta: [
+      { title: "About Hirespirit — Our Vision, Mission & Team" },
+      { name: "description", content: "Learn about Hirespirit — our vision, mission, values, and the senior team behind every project. Honest work, fast delivery." },
+      { property: "og:title", content: "About Hirespirit — Our Vision, Mission & Team" },
+      { property: "og:description", content: "Meet the team behind Hirespirit. Senior designers and engineers obsessed with craft, speed, and client outcomes." },
+      { property: "og:url", content: "https://hirespirit.tech/about" },
+    ],
+    links: [{ rel: "canonical", href: "https://hirespirit.tech/about" }],
+  }),
   component: About,
 });
 

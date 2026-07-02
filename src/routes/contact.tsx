@@ -6,6 +6,16 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
 export const Route = createFileRoute("/contact")({
+  head: () => ({
+    meta: [
+      { title: "Contact Hirespirit — Start Your Web Project" },
+      { name: "description", content: "Get in touch with Hirespirit. Tell us about your project and we will respond within one business day with an honest, no-pressure proposal." },
+      { property: "og:title", content: "Contact Hirespirit — Start Your Web Project" },
+      { property: "og:description", content: "Ready to build something great? Contact Hirespirit and get a clear proposal within one business day." },
+      { property: "og:url", content: "https://hirespirit.tech/contact" },
+    ],
+    links: [{ rel: "canonical", href: "https://hirespirit.tech/contact" }],
+  }),
   component: Contact,
 });
 

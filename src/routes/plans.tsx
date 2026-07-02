@@ -5,6 +5,16 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
 export const Route = createFileRoute("/plans")({
+  head: () => ({
+    meta: [
+      { title: "Pricing Plans — Hirespirit Website & Web App Packages" },
+      { name: "description", content: "Transparent, fixed-price web design packages. Starter from ₹29,999, Growth from ₹74,999, or custom Enterprise. No hidden fees, no retainers." },
+      { property: "og:title", content: "Pricing Plans — Hirespirit Website & Web App Packages" },
+      { property: "og:description", content: "Fixed-price web packages starting at ₹29,999. Honest pricing, clear scope, fast delivery." },
+      { property: "og:url", content: "https://hirespirit.tech/plans" },
+    ],
+    links: [{ rel: "canonical", href: "https://hirespirit.tech/plans" }],
+  }),
   component: Plans,
 });
 

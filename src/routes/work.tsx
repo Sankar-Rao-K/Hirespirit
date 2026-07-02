@@ -7,6 +7,16 @@ import heroBg from "@/assets/hero-bg.jpg";
 import { logoBase64 } from "@/assets/logo";
 
 export const Route = createFileRoute("/work")({
+  head: () => ({
+    meta: [
+      { title: "Our Work — Hirespirit Web Design Portfolio" },
+      { name: "description", content: "Browse Hirespirit projects — websites, web apps, and landing pages that delivered real business results for restaurants, SaaS companies, agencies, and more." },
+      { property: "og:title", content: "Our Work — Hirespirit Web Design Portfolio" },
+      { property: "og:description", content: "Real projects, real results. See how Hirespirit builds digital products that convert." },
+      { property: "og:url", content: "https://hirespirit.tech/work" },
+    ],
+    links: [{ rel: "canonical", href: "https://hirespirit.tech/work" }],
+  }),
   component: Work,
 });
 
