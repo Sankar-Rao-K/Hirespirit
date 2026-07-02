@@ -12,16 +12,15 @@ const Instagram = ({ className }: { className?: string }) => (
 
 const footerLinks = {
   Company: [
-    { label: "Home", to: "/" },
+    { label: "Home",    to: "/" },
     { label: "About Us", to: "/about" },
-    { label: "Our Work", to: "/work" },
-    { label: "Plans", to: "/plans" },
+    { label: "Plans",   to: "/plans" },
   ],
   Services: [
-    { label: "Websites", to: "/work" },
-    { label: "Web Apps", to: "/work" },
-    { label: "Landing Pages", to: "/work" },
-    { label: "Brand Systems", to: "/work" },
+    { label: "Websites",      to: "/contact" },
+    { label: "Web Apps",      to: "/contact" },
+    { label: "Landing Pages", to: "/contact" },
+    { label: "Brand Systems", to: "/contact" },
   ],
 };
 

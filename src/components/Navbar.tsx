@@ -7,7 +7,6 @@ import { logoBase64 } from "@/assets/logo";
 const navLinks = [
   { label: "Home",    to: "/" },
   { label: "About",   to: "/about" },
-  { label: "Work",    to: "/work" },
   { label: "Plans",   to: "/plans" },
   { label: "Contact", to: "/contact" },
 ];

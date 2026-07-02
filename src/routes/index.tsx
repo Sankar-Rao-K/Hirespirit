@@ -16,24 +16,24 @@ export const Route = createFileRoute("/")({
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const } },
 };
 const stagger = { show: { transition: { staggerChildren: 0.08 } } };
 
 const services = [
-  { icon: Layout,     title: "Websites",      desc: "Marketing sites and brand experiences built to convert visitors into customers." },
-  { icon: Code2,      title: "Web Apps",       desc: "Custom dashboards, internal tools, and SaaS products engineered to scale." },
-  { icon: Smartphone, title: "Landing Pages",  desc: "High-converting pages for product launches, campaigns, and ad funnels." },
-  { icon: Sparkles,   title: "Portfolios",     desc: "Polished portfolio sites for creators, founders, and consultants." },
-  { icon: Zap,        title: "Automation",     desc: "Workflow automation that saves hours and removes operational friction." },
-  { icon: Globe,      title: "Brand Systems",  desc: "Cohesive digital identity — logos, design systems, and visual language." },
+  { icon: Layout, title: "Websites", desc: "Marketing sites and brand experiences built to convert visitors into customers." },
+  { icon: Code2, title: "Web Apps", desc: "Custom dashboards, internal tools, and SaaS products engineered to scale." },
+  { icon: Smartphone, title: "Landing Pages", desc: "High-converting pages for product launches, campaigns, and ad funnels." },
+  { icon: Sparkles, title: "Portfolios", desc: "Polished portfolio sites for creators, founders, and consultants." },
+  { icon: Zap, title: "Automation", desc: "Workflow automation that saves hours and removes operational friction." },
+  { icon: Globe, title: "Brand Systems", desc: "Cohesive digital identity — logos, design systems, and visual language." },
 ];
 
 const whyUs = [
-  { icon: Shield,     label: "Fixed scope, fixed timeline — no surprise invoices" },
-  { icon: Code2,      label: "Production-grade code you actually own" },
+  { icon: Shield, label: "Fixed scope, fixed timeline — no surprise invoices" },
+  { icon: Code2, label: "Production-grade code you actually own" },
   { icon: TrendingUp, label: "Performance, SEO, and accessibility baked in" },
-  { icon: Clock,      label: "Post-launch support without retainers" },
+  { icon: Clock, label: "Post-launch support without retainers" },
 ];
 
 function Home() {
@@ -114,19 +114,19 @@ function Home() {
                     Build Your Ideas <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" aria-hidden="true" />
                   </Link>
                   <Link
-                    to="/work"
+                    to="/about"
                     className="inline-flex items-center gap-2 rounded-full border border-border bg-white/70 backdrop-blur-sm px-7 py-3.5 font-medium text-foreground hover:bg-accent transition hover:-translate-y-0.5"
                   >
-                    See Our Work
+                    Learn About Us
                   </Link>
                 </motion.div>
 
                 {/* Stats */}
                 <motion.div variants={fadeUp} className="mt-14 flex flex-wrap gap-x-10 gap-y-6">
                   {[
-                    ["10+",   "Projects Shipped"],
-                    ["100%",  "Client Focused"],
-                    ["4.9★",  "Client Rating"],
+                    ["10+", "Projects Shipped"],
+                    ["100%", "Client Focused"],
+                    ["4.9★", "Client Rating"],
                   ].map(([n, l]) => (
                     <div key={l}>
                       <div className="text-3xl font-display font-bold text-gradient">{n}</div>
