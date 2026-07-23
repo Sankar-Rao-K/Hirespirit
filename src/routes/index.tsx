@@ -1,335 +1,533 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
-  ArrowRight, Code2, Layout, Smartphone, Sparkles, Zap, Globe,
-  CheckCircle2, TrendingUp, Shield, Clock,
+  ArrowUpRight, ArrowRight, Globe, Smartphone, Cpu, Bot, Palette, Cloud,
+  Search, Shield, Sparkles, Layers, CheckCircle2, Zap,
+  Stethoscope, GraduationCap, UtensilsCrossed, Building2, ShoppingBag,
+  Plane, Dumbbell, Landmark, Factory, Star, TrendingUp, Users, Rocket,
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { TechBackground } from "@/components/TechBackground";
-import { logoBase64 } from "@/assets/logo";
-import heroBg from "@/assets/hero-bg.jpg";
+import { SITE_URL } from "@/lib/site-config";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Hirespirit — Digital solutions for modern businesses" },
+      { name: "description", content: "Hirespirit is a full-service technology partner: websites, mobile apps, custom software, AI solutions, SEO and hosting for businesses across every industry." },
+      { name: "keywords", content: "Hirespirit, website development, mobile app development, custom software, AI solutions, SEO agency, Hyderabad" },
+      { property: "og:title", content: "Hirespirit — Digital solutions for modern businesses" },
+      { property: "og:description", content: "Websites, mobile apps, AI, and custom software for every industry. From MVP to enterprise." },
+      { property: "og:url", content: SITE_URL },
+      { name: "twitter:title", content: "Hirespirit — Digital solutions for modern businesses" },
+      { name: "twitter:description", content: "Websites, mobile apps, AI, and custom software for every industry. From MVP to enterprise." },
+    ],
+    links: [{ rel: "canonical", href: SITE_URL }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Hirespirit",
+          url: SITE_URL,
+        }),
+      },
+    ],
+  }),
   component: Home,
 });
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const } },
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } },
 };
 const stagger = { show: { transition: { staggerChildren: 0.08 } } };
 
 const services = [
-  { icon: Layout, title: "Websites", desc: "Marketing sites and brand experiences built to convert visitors into customers." },
-  { icon: Code2, title: "Web Apps", desc: "Custom dashboards, internal tools, and SaaS products engineered to scale." },
-  { icon: Smartphone, title: "Landing Pages", desc: "High-converting pages for product launches, campaigns, and ad funnels." },
-  { icon: Sparkles, title: "Portfolios", desc: "Polished portfolio sites for creators, founders, and consultants." },
-  { icon: Zap, title: "Automation", desc: "Workflow automation that saves hours and removes operational friction." },
-  { icon: Globe, title: "Brand Systems", desc: "Cohesive digital identity — logos, design systems, and visual language." },
+  { icon: Globe, title: "Website Development", desc: "Business, e-commerce, booking, portfolio & landing pages built to convert.", tags: ["Responsive", "SEO", "Admin Panel"] },
+  { icon: Smartphone, title: "Mobile Apps", desc: "Android, iOS & cross-platform apps with payments, GPS, push & offline support.", tags: ["React Native", "Flutter", "Expo"] },
+  { icon: Cpu, title: "Custom Software", desc: "ERP, CRM, HRMS, POS, inventory & billing systems built for your workflow.", tags: ["ERP", "CRM", "POS"] },
+  { icon: Bot, title: "AI Solutions", desc: "Chatbots, voice assistants, OCR, recommendations and AI agents.", tags: ["OpenAI", "LangChain", "Agents"] },
+  { icon: Palette, title: "UI/UX Design", desc: "Wireframes, Figma design, dashboards and full website redesigns.", tags: ["Figma", "Design Systems"] },
+  { icon: Search, title: "SEO & Marketing", desc: "Technical SEO, local SEO, ads, funnels and lead-generation systems.", tags: ["Google Ads", "Meta Ads"] },
+  { icon: Cloud, title: "Cloud & Hosting", desc: "AWS, Cloudflare, Firebase, Supabase, Docker and CI/CD deployments.", tags: ["AWS", "Cloudflare"] },
+  { icon: Shield, title: "Maintenance & Security", desc: "SSL, backups, audits, uptime monitoring and monthly reports.", tags: ["24/7", "SLA"] },
 ];
 
-const whyUs = [
-  { icon: Shield, label: "Fixed scope, fixed timeline — no surprise invoices" },
-  { icon: Code2, label: "Production-grade code you actually own" },
-  { icon: TrendingUp, label: "Performance, SEO, and accessibility baked in" },
-  { icon: Clock, label: "Post-launch support without retainers" },
+const industries = [
+  { icon: Stethoscope, name: "Healthcare", note: "EMR, appointments, patient apps" },
+  { icon: GraduationCap, name: "Education", note: "School ERP, LMS, parent apps" },
+  { icon: UtensilsCrossed, name: "Restaurants", note: "QR menu, ordering, delivery" },
+  { icon: Building2, name: "Real Estate", note: "Property portals, agent CRM" },
+  { icon: ShoppingBag, name: "E-commerce", note: "Single & multi-vendor stores" },
+  { icon: Plane, name: "Travel & Hotels", note: "Booking engines, guest apps" },
+  { icon: Dumbbell, name: "Fitness & Gyms", note: "Memberships, tracking, trainers" },
+  { icon: Landmark, name: "Finance & NBFC", note: "Loans, EMI, customer portals" },
+  { icon: Factory, name: "Manufacturing", note: "Inventory, production, ERP" },
+];
+
+const packages = [
+  { name: "Launch", tier: "Bronze", price: "₹25,000", tagline: "Get online — fast.",
+    highlights: ["5-page responsive website", "Contact form + WhatsApp", "Google Maps + Analytics", "Basic on-page SEO", "SSL setup + 1 month support"] },
+  { name: "Grow", tier: "Silver", price: "₹65,000", featured: true, tagline: "For serious businesses.",
+    highlights: ["10-page CMS website", "Admin panel + bookings", "Payment gateway integration", "SEO + Google Business setup", "3 months maintenance"] },
+  { name: "Scale", tier: "Gold", price: "₹1,50,000+", tagline: "Complete digital suite.",
+    highlights: ["Website + mobile app", "AI chatbot / automation", "Admin & vendor dashboards", "Cloud hosting + CI/CD", "6 months priority support"] },
+];
+
+const process = [
+  { step: "01", title: "Discovery", desc: "We map your goals, users, competitors and scope before writing a single line." },
+  { step: "02", title: "Design", desc: "Wireframes to polished UI in Figma — approved before development starts." },
+  { step: "03", title: "Build", desc: "Production-grade code, weekly demos, and a client dashboard for visibility." },
+  { step: "04", title: "Launch & Scale", desc: "Deployment, SEO, analytics, and ongoing maintenance so you keep growing." },
+];
+
+const heroServiceTiles = [
+  { icon: Globe, label: "Web", tint: "from-primary/10 to-primary-glow/5" },
+  { icon: Smartphone, label: "Mobile", tint: "from-primary-glow/15 to-primary/5" },
+  { icon: Bot, label: "AI", tint: "from-primary/15 to-primary-glow/10" },
+  { icon: Cpu, label: "Software", tint: "from-primary-glow/10 to-primary/10" },
 ];
 
 function Home() {
   return (
-    <>
-      {/* ── SEO: structured data for organization ── */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "Hirespirit",
-            url: "https://hirespirit.tech",
-            logo: "https://hirespirit.tech/logo.png",
-            description:
-              "Hirespirit builds custom websites, web apps, and landing pages for modern businesses. Conversion-focused digital products delivered fast.",
-            contactPoint: {
-              "@type": "ContactPoint",
-              telephone: "+91-94914-62696",
-              contactType: "customer service",
-              email: "hirespiritatz6@gmail.com",
-              areaServed: "IN",
-              availableLanguage: "English",
-            },
-            sameAs: ["https://instagram.com/hirespirit.tech"],
-          }),
-        }}
-      />
+    <div className="min-h-screen bg-background text-foreground">
+      <Navbar />
 
-      <div className="min-h-screen bg-background text-foreground">
-        <Navbar />
+      {/* ── HERO — dense two-column, light mode ── */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-cream via-background to-accent/40 pt-32 pb-20 md:pt-36 md:pb-28">
+        {/* animated ambient background */}
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-32 -left-32 w-[520px] h-[520px] rounded-full bg-primary/12 blur-3xl animate-[pulse_10s_ease-in-out_infinite]" />
+          <div className="absolute top-40 -right-40 w-[560px] h-[560px] rounded-full bg-primary-glow/15 blur-3xl animate-[pulse_14s_ease-in-out_infinite]" />
+          <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(var(--primary-deep)_1px,transparent_1px),linear-gradient(90deg,var(--primary-deep)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_50%,transparent_100%)]" />
+        </div>
 
-        {/* ── Hero ── */}
-        <section
-          className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-blue-50 via-white to-white"
-          aria-label="Hero section"
-        >
-          <TechBackground />
+        <div className="relative mx-auto max-w-7xl px-6">
+          <div className="grid lg:grid-cols-[1.15fr_1fr] gap-14 items-center">
+            {/* LEFT — copy */}
+            <motion.div initial="hidden" animate="show" variants={stagger}>
+              <motion.span variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/8 px-4 py-1.5 text-xs font-semibold tracking-wider uppercase text-primary">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                </span>
+                Technology partner for modern businesses
+              </motion.span>
 
-          {/* Soft vignette so content stays readable */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_30%,transparent_40%,rgba(255,255,255,0.6)_100%)]" />
+              <motion.h1 variants={fadeUp} className="mt-7 text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.02] tracking-tight text-primary-deep">
+                We build the{" "}
+                <span className="relative inline-block">
+                  <span className="text-gradient-emerald italic font-normal">digital systems</span>
+                  <svg className="absolute -bottom-2 left-0 w-full h-3 text-primary/25" viewBox="0 0 100 10" preserveAspectRatio="none">
+                    <path d="M0 6 Q 25 0, 50 6 T 100 6" fill="none" stroke="currentColor" strokeWidth="3" />
+                  </svg>
+                </span>{" "}
+                that grow your business.
+              </motion.h1>
 
-          <div className="relative w-full mx-auto max-w-7xl px-6 pt-28 pb-24 md:pt-36 md:pb-32">
-            <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 items-center">
-
-              {/* Left: text */}
-              <motion.div initial="hidden" animate="show" variants={stagger}>
-                <motion.span
-                  variants={fadeUp}
-                  className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur px-4 py-1.5 text-xs font-medium text-primary"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
-                  Now booking Q3 2026 projects
-                </motion.span>
-
-                <motion.h1
-                  variants={fadeUp}
-                  className="mt-6 text-5xl md:text-7xl font-bold font-display leading-[1.05] tracking-tight text-foreground"
-                >
-                  Digital systems<br />
-                  that <span className="text-gradient">drive growth.</span>
-                </motion.h1>
-
-                <motion.p
-                  variants={fadeUp}
-                  className="mt-6 text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed"
-                >
-                  Hirespirit builds websites, web apps, and landing pages for modern businesses —
-                  custom-built, conversion-focused, and delivered without agency overhead.
-                </motion.p>
-
-                <motion.div variants={fadeUp} className="mt-10 flex flex-wrap gap-4">
-                  <Link
-                    to="/contact"
-                    className="group inline-flex items-center gap-2 rounded-full bg-gradient-primary text-primary-foreground px-7 py-3.5 font-medium shadow-elegant hover:shadow-glow hover:-translate-y-0.5 transition-all"
-                  >
-                    Build Your Ideas <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" aria-hidden="true" />
-                  </Link>
-                  <Link
-                    to="/about"
-                    className="inline-flex items-center gap-2 rounded-full border border-border bg-white/70 backdrop-blur-sm px-7 py-3.5 font-medium text-foreground hover:bg-accent transition hover:-translate-y-0.5"
-                  >
-                    Learn About Us
-                  </Link>
-                </motion.div>
-
-                {/* Stats */}
-                <motion.div variants={fadeUp} className="mt-14 flex flex-wrap gap-x-10 gap-y-6">
-                  {[
-                    ["10+", "Projects Shipped"],
-                    ["100%", "Client Focused"],
-                    ["4.9★", "Client Rating"],
-                  ].map(([n, l]) => (
-                    <div key={l}>
-                      <div className="text-3xl font-display font-bold text-gradient">{n}</div>
-                      <div className="text-muted-foreground mt-1 text-sm">{l}</div>
-                    </div>
-                  ))}
-                </motion.div>
-              </motion.div>
-
-              {/* Right: visual — floating feature cards instead of a static logo */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.92 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] as const }}
-                className="hidden lg:block relative h-[420px]"
-                aria-hidden="true"
-              >
-                {/* Center glow */}
-                <div className="absolute inset-0 m-auto w-72 h-72 rounded-full bg-primary/10 blur-3xl" />
-
-                {/* Floating card 1 */}
-                <motion.div
-                  animate={{ y: [0, -14, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute top-6 left-2 w-48 rounded-2xl bg-white border border-border shadow-elegant p-5"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-gradient-primary flex items-center justify-center mb-3">
-                    <Code2 className="w-4.5 h-4.5 text-white" />
-                  </div>
-                  <p className="text-xs text-muted-foreground">Avg. build time</p>
-                  <p className="text-xl font-display font-bold mt-0.5">7–14 days</p>
-                </motion.div>
-
-                {/* Floating card 2 */}
-                <motion.div
-                  animate={{ y: [0, 16, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                  className="absolute top-44 right-0 w-52 rounded-2xl bg-white border border-border shadow-elegant p-5"
-                >
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-9 h-9 rounded-lg bg-gradient-primary flex items-center justify-center">
-                      <TrendingUp className="w-4.5 h-4.5 text-white" />
-                    </div>
-                    <span className="text-xs font-medium text-green-600 bg-green-50 px-2 py-0.5 rounded-full">Live</span>
-                  </div>
-                  <p className="text-xs text-muted-foreground">Client focus rate</p>
-                  <p className="text-xl font-display font-bold mt-0.5">100%</p>
-                </motion.div>
-
-                {/* Floating card 3 */}
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute bottom-6 left-12 w-44 rounded-2xl bg-white border border-border shadow-elegant p-5"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-gradient-primary flex items-center justify-center mb-3">
-                    <Shield className="w-4.5 h-4.5 text-white" />
-                  </div>
-                  <p className="text-xs text-muted-foreground">Fixed scope</p>
-                  <p className="text-xl font-display font-bold mt-0.5">Zero surprises</p>
-                </motion.div>
-
-                {/* Connecting dots */}
-                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 420 420" fill="none">
-                  <circle cx="100" cy="60" r="3" fill="rgba(37,99,235,0.4)" />
-                  <circle cx="320" cy="210" r="3" fill="rgba(37,99,235,0.4)" />
-                  <circle cx="160" cy="370" r="3" fill="rgba(37,99,235,0.4)" />
-                </svg>
-              </motion.div>
-            </div>
-
-            {/* Scroll indicator */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.5, duration: 0.8 }}
-              className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-primary/40"
-              aria-hidden="true"
-            >
-              <span className="text-xs tracking-widest uppercase">Scroll</span>
-              <div className="w-px h-8 bg-gradient-to-b from-primary/40 to-transparent" />
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ── Services ── */}
-        <section className="py-24 md:py-32" aria-labelledby="services-heading">
-          <div className="mx-auto max-w-7xl px-6">
-            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="max-w-2xl">
-              <p className="text-sm font-medium text-primary uppercase tracking-widest">What We Do</p>
-              <h2 id="services-heading" className="mt-3 text-4xl md:text-5xl font-bold font-display">
-                Built for businesses that ship.
-              </h2>
-              <p className="mt-4 text-lg text-muted-foreground">
-                From a single landing page to a full digital platform — we cover the full stack.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              variants={stagger}
-              className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {services.map((s) => (
-                <motion.article
-                  key={s.title}
-                  variants={fadeUp}
-                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                  className="group relative rounded-2xl border border-border bg-card p-8 shadow-card hover:shadow-elegant transition-all duration-300"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center shadow-sm" aria-hidden="true">
-                    <s.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="mt-6 text-xl font-semibold font-display">{s.title}</h3>
-                  <p className="mt-2 text-muted-foreground leading-relaxed">{s.desc}</p>
-                  <div className="absolute inset-x-0 bottom-0 h-1 rounded-b-2xl bg-gradient-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
-                </motion.article>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ── Why Us ── */}
-        <section className="py-24 md:py-32 bg-secondary/40" aria-labelledby="why-heading">
-          <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
-              <motion.p variants={fadeUp} className="text-sm font-medium text-primary uppercase tracking-widest">
-                Why Hirespirit
+              <motion.p variants={fadeUp} className="mt-7 text-lg text-muted-foreground max-w-xl leading-relaxed">
+                Websites, mobile apps, custom software, AI solutions and end-to-end
+                digital transformation — designed and delivered like a full-service agency.
               </motion.p>
-              <motion.h2 id="why-heading" variants={fadeUp} className="mt-3 text-4xl md:text-5xl font-bold font-display">
-                Senior thinking. Startup speed.
-              </motion.h2>
-              <motion.p variants={fadeUp} className="mt-4 text-lg text-muted-foreground">
-                You get a small, senior team that takes full ownership of your project. No account
-                managers, no handoffs — direct access to the people designing and building for you.
-              </motion.p>
-              <motion.ul variants={stagger} className="mt-8 space-y-4" role="list">
-                {whyUs.map((item) => (
-                  <motion.li key={item.label} variants={fadeUp} className="flex gap-3 items-start">
-                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5" aria-hidden="true">
-                      <CheckCircle2 className="w-4 h-4 text-primary" />
-                    </div>
-                    <span className="mt-1">{item.label}</span>
-                  </motion.li>
-                ))}
-              </motion.ul>
-              <motion.div variants={fadeUp} className="mt-10">
-                <Link to="/about" className="inline-flex items-center gap-2 text-primary font-medium hover:underline">
-                  Learn More About Us <ArrowRight className="w-4 h-4" aria-hidden="true" />
+
+              <motion.div variants={fadeUp} className="mt-9 flex flex-wrap gap-3">
+                <Link to="/contact" className="group inline-flex items-center gap-2 rounded-full bg-emerald-gradient text-cream px-7 py-3.5 font-medium shadow-elegant hover:shadow-gold hover:-translate-y-0.5 transition-all">
+                  Start your project <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition" />
+                </Link>
+                <Link to="/services" className="inline-flex items-center gap-2 rounded-full border-2 border-primary-deep/15 bg-card px-7 py-3.5 font-medium text-primary-deep hover:border-primary/40 hover:bg-primary/5 transition">
+                  Explore services
                 </Link>
               </motion.div>
+
+              {/* trust strip */}
+              <motion.div variants={fadeUp} className="mt-10 flex items-center gap-6 pt-6 border-t border-primary-deep/10">
+                <div className="flex -space-x-2.5">
+                  {["HS", "AM", "RV", "JD"].map((i, idx) => (
+                    <div key={i} className="w-9 h-9 rounded-full border-2 border-cream bg-emerald-gradient text-cream text-[10px] font-semibold flex items-center justify-center shadow-soft" style={{ zIndex: 10 - idx }}>{i}</div>
+                  ))}
+                </div>
+                <div className="text-sm">
+                  <div className="flex gap-0.5 text-primary mb-0.5">
+                    {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-primary" />)}
+                  </div>
+                  <span className="font-semibold text-primary-deep">4.9/5</span>
+                  <span className="text-muted-foreground"> from clients worldwide</span>
+                </div>
+              </motion.div>
             </motion.div>
 
+            {/* RIGHT — dense bento mosaic */}
             <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative aspect-square rounded-3xl bg-gradient-primary shadow-elegant overflow-hidden max-w-md mx-auto lg:mx-0 w-full"
-              aria-hidden="true"
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="relative"
             >
-              <img src={heroBg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay" />
-              <div className="absolute inset-0 flex items-center justify-center p-16">
-                <img src={logoBase64} alt="Hirespirit" className="w-full max-w-xs drop-shadow-2xl" />
+              <div className="grid grid-cols-6 grid-rows-6 gap-3 h-[540px]">
+                {/* Big stat card */}
+                <div className="col-span-4 row-span-3 rounded-3xl bg-emerald-gradient text-cream p-6 shadow-elegant relative overflow-hidden group">
+                  <div className="absolute inset-0 opacity-30 [background-image:radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.25)_1px,transparent_0)] [background-size:20px_20px]" />
+                  <div className="absolute -bottom-16 -right-16 w-48 h-48 rounded-full bg-primary-glow/40 blur-2xl group-hover:scale-125 transition-transform duration-700" />
+                  <div className="relative flex flex-col h-full justify-between">
+                    <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-cream/70">
+                      <TrendingUp className="w-3.5 h-3.5" /> Delivered
+                    </div>
+                    <div>
+                      <div className="text-6xl md:text-7xl font-display font-semibold leading-none">50+</div>
+                      <div className="mt-2 text-cream/80 text-sm">Modular services across 9 industries</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Small stat */}
+                <div className="col-span-2 row-span-3 rounded-3xl bg-card border border-primary-deep/10 p-5 shadow-soft flex flex-col justify-between">
+                  <Users className="w-6 h-6 text-primary" />
+                  <div>
+                    <div className="text-4xl font-display font-semibold text-primary-deep">10+</div>
+                    <div className="mt-1 text-xs text-muted-foreground uppercase tracking-wider">Projects live</div>
+                  </div>
+                </div>
+
+                {/* Service tiles row */}
+                {heroServiceTiles.map((t, i) => (
+                  <motion.div
+                    key={t.label}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 + i * 0.08, duration: 0.5 }}
+                    className={`col-span-3 lg:col-span-[1.5] row-span-2 rounded-2xl bg-gradient-to-br ${t.tint} border border-primary-deep/10 p-4 flex flex-col justify-between hover:-translate-y-1 hover:shadow-elegant transition-all cursor-default`}
+                    style={{ gridColumn: `span ${i < 2 ? 3 : 3} / span ${i < 2 ? 3 : 3}` }}
+                  >
+                    <div className="w-9 h-9 rounded-lg bg-card shadow-soft flex items-center justify-center">
+                      <t.icon className="w-4 h-4 text-primary" />
+                    </div>
+                    <div className="text-sm font-semibold text-primary-deep">{t.label}</div>
+                  </motion.div>
+                ))}
+
+                {/* Rating card */}
+                <div className="col-span-3 row-span-1 rounded-2xl bg-card border border-primary-deep/10 px-4 flex items-center justify-between shadow-soft">
+                  <div className="flex items-center gap-2">
+                    <Rocket className="w-4 h-4 text-primary" />
+                    <span className="text-xs font-semibold text-primary-deep">Ships in 2–8 weeks</span>
+                  </div>
+                  <ArrowUpRight className="w-4 h-4 text-primary-deep/40" />
+                </div>
+
+                {/* Rating stat */}
+                <div className="col-span-3 row-span-1 rounded-2xl bg-primary-deep text-cream px-4 flex items-center justify-between shadow-elegant">
+                  <div className="flex items-center gap-1.5">
+                    <div className="flex gap-0.5">
+                      {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 fill-primary-glow text-primary-glow" />)}
+                    </div>
+                    <span className="text-xs font-semibold">4.9 Rating</span>
+                  </div>
+                  <span className="text-xs text-cream/60">Verified</span>
+                </div>
+              </div>
+
+              {/* floating tag */}
+              <div className="absolute -top-4 -right-4 rounded-full bg-cream border border-primary/20 shadow-elegant px-4 py-2 text-xs font-semibold text-primary flex items-center gap-1.5 animate-[bounce_5s_ease-in-out_infinite]">
+                <Sparkles className="w-3.5 h-3.5" /> Available Now
               </div>
             </motion.div>
           </div>
-        </section>
+        </div>
 
-        {/* ── CTA ── */}
-        <section className="py-24 md:py-32 relative overflow-hidden" aria-labelledby="cta-heading">
-          <div className="absolute inset-0 bg-gradient-primary" aria-hidden="true" />
-          <img src={heroBg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay" />
-          <div className="relative mx-auto max-w-4xl px-6 text-center text-primary-foreground">
-            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
-              <motion.h2 id="cta-heading" variants={fadeUp} className="text-4xl md:text-6xl font-bold font-display leading-tight">
-                Ready to build something great?
-              </motion.h2>
-              <motion.p variants={fadeUp} className="mt-5 text-lg md:text-xl opacity-85 max-w-2xl mx-auto">
-                Tell us about your project. We respond within one business day with a clear, honest proposal.
-              </motion.p>
-              <motion.div variants={fadeUp} className="mt-10 flex flex-wrap justify-center gap-4">
+        {/* marquee of capabilities */}
+        <div className="mt-20 relative border-y border-primary-deep/10 bg-card/70 backdrop-blur py-5 overflow-hidden">
+          <div className="flex gap-10 whitespace-nowrap animate-[marquee_35s_linear_infinite] text-primary-deep/45 text-sm uppercase tracking-[0.3em] font-medium">
+            {[...Array(2)].map((_, i) => (
+              <div key={i} className="flex gap-10 items-center">
+                {["Web Development", "Mobile Apps", "AI & Automation", "Custom Software", "UI/UX Design", "SEO & Marketing", "Cloud & DevOps", "Branding", "Business Consulting"].map((t) => (
+                  <span key={t} className="flex items-center gap-10">
+                    {t} <span className="text-primary">✦</span>
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+        <style>{`@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }`}</style>
+      </section>
+
+      {/* ── SERVICES ── */}
+      <section className="py-28 bg-background">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary mb-3">What we do</p>
+              <h2 className="text-4xl md:text-5xl font-semibold text-primary-deep max-w-2xl">
+                A complete digital agency, under one roof.
+              </h2>
+            </div>
+            <p className="text-muted-foreground max-w-md leading-relaxed">
+              We don't just build websites — we solve business problems using technology.
+              From MVP to enterprise, every service is modular and priced transparently.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {services.map((s, i) => (
+              <motion.div
+                key={s.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, delay: i * 0.05 }}
+                className="group relative rounded-2xl border border-primary-deep/10 bg-card p-6 hover:border-primary/40 hover:shadow-elegant hover:-translate-y-1 transition-all"
+              >
+                <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-emerald-gradient transition-colors">
+                  <s.icon className="w-5 h-5 text-primary group-hover:text-cream transition-colors" />
+                </div>
+                <h3 className="text-lg font-semibold text-primary-deep">{s.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {s.tags.map((t) => (
+                    <span key={t} className="text-[10px] font-medium uppercase tracking-wider px-2 py-1 rounded-full bg-accent text-primary-deep/70">{t}</span>
+                  ))}
+                </div>
+                <ArrowUpRight className="absolute top-6 right-6 w-4 h-4 text-primary-deep/30 group-hover:text-primary group-hover:rotate-12 transition-all" />
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-10 text-center">
+            <Link to="/services" className="inline-flex items-center gap-2 text-primary-deep font-medium hover:text-primary group">
+              See the full service catalogue <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── INDUSTRIES (light) ── */}
+      <section className="py-28 bg-gradient-to-b from-accent/30 to-background relative overflow-hidden">
+        <div className="absolute inset-0 opacity-40 [background-image:radial-gradient(circle_at_1px_1px,var(--primary)_1px,transparent_0)] [background-size:36px_36px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_50%,transparent_100%)]" />
+        <div className="relative mx-auto max-w-7xl px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
+            <div className="max-w-2xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary mb-3">Industries we power</p>
+              <h2 className="text-4xl md:text-5xl font-semibold text-primary-deep">
+                Purpose-built solutions for <span className="text-gradient-emerald italic font-normal">every industry.</span>
+              </h2>
+            </div>
+            <p className="text-muted-foreground max-w-md leading-relaxed">
+              We don't sell generic packages. Every industry gets a purpose-built suite —
+              website, apps, dashboards and AI features designed for its workflow.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {industries.map((ind, i) => (
+              <motion.div
+                key={ind.name}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.45, delay: i * 0.04 }}
+                className="group rounded-2xl bg-card border border-primary-deep/10 p-6 hover:border-primary/40 hover:shadow-elegant hover:-translate-y-1 transition-all cursor-default"
+              >
+                <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-emerald-gradient transition-colors">
+                  <ind.icon className="w-5 h-5 text-primary group-hover:text-cream transition-colors" />
+                </div>
+                <h3 className="text-lg font-semibold text-primary-deep">{ind.name}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{ind.note}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <Link to="/industries" className="inline-flex items-center gap-2 rounded-full bg-emerald-gradient text-cream px-6 py-3 text-sm font-medium shadow-elegant hover:shadow-gold hover:-translate-y-0.5 transition-all">
+              Explore all industries <ArrowUpRight className="w-4 h-4" />
+            </Link>
+            <span className="text-muted-foreground text-sm">NGOs · Government · Retail · Hospitality · Media · Sports · SaaS</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PROCESS ── */}
+      <section className="py-28 bg-background">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="text-center mb-16">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary mb-3">How we work</p>
+            <h2 className="text-4xl md:text-5xl font-semibold text-primary-deep">A process built on clarity.</h2>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-6">
+            {process.map((p, i) => (
+              <motion.div
+                key={p.step}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="relative rounded-2xl bg-card border border-primary-deep/10 p-6 hover:border-primary/30 hover:shadow-soft transition-all"
+              >
+                <div className="text-6xl font-display font-semibold text-gradient-emerald opacity-70">{p.step}</div>
+                <h3 className="mt-4 text-xl font-semibold text-primary-deep">{p.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+                {i < process.length - 1 && (
+                  <div className="hidden md:block absolute top-10 -right-3 w-6 h-px bg-gradient-to-r from-primary/30 to-transparent" />
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PACKAGES ── */}
+      <section className="py-28 bg-accent/30">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary mb-3">Transparent packages</p>
+              <h2 className="text-4xl md:text-5xl font-semibold text-primary-deep max-w-xl">
+                Pricing you can actually plan around.
+              </h2>
+            </div>
+            <p className="text-muted-foreground max-w-md">
+              Every project is quoted line-by-line — discovery, design, development, SEO,
+              deployment and testing. Starting points below.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-6">
+            {packages.map((p) => (
+              <div
+                key={p.name}
+                className={`relative rounded-3xl p-8 border transition-all ${
+                  p.featured
+                    ? "bg-emerald-gradient text-cream border-transparent shadow-elegant lg:scale-105"
+                    : "bg-card border-primary-deep/10 hover:border-primary/30 hover:shadow-soft"
+                }`}
+              >
+                {p.featured && (
+                  <span className="absolute top-6 right-6 text-[10px] font-semibold uppercase tracking-widest bg-cream text-primary-deep px-2.5 py-1 rounded-full">
+                    Most Popular
+                  </span>
+                )}
+                <p className={`text-xs font-semibold uppercase tracking-widest ${p.featured ? "text-cream/80" : "text-primary"}`}>{p.tier}</p>
+                <h3 className={`mt-2 text-3xl font-semibold ${p.featured ? "text-cream" : "text-primary-deep"}`}>{p.name}</h3>
+                <p className={`mt-1 text-sm ${p.featured ? "text-cream/70" : "text-muted-foreground"}`}>{p.tagline}</p>
+
+                <div className="mt-6 flex items-baseline gap-2">
+                  <span className={`text-4xl font-display font-semibold ${p.featured ? "text-cream" : "text-primary-deep"}`}>{p.price}</span>
+                  <span className={`text-sm ${p.featured ? "text-cream/60" : "text-muted-foreground"}`}>starting</span>
+                </div>
+
+                <ul className="mt-8 space-y-3">
+                  {p.highlights.map((h) => (
+                    <li key={h} className={`flex items-start gap-3 text-sm ${p.featured ? "text-cream/85" : "text-foreground/80"}`}>
+                      <CheckCircle2 className={`w-4 h-4 mt-0.5 shrink-0 ${p.featured ? "text-cream" : "text-primary"}`} />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-white text-primary px-8 py-4 font-semibold hover:bg-white/90 transition hover:-translate-y-0.5 shadow-lg"
+                  className={`mt-10 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-all ${
+                    p.featured
+                      ? "bg-cream text-primary-deep hover:shadow-gold"
+                      : "border border-primary-deep/20 text-primary-deep hover:bg-primary-deep hover:text-cream"
+                  }`}
                 >
-                  Build Your Ideas <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                  Get a quote <ArrowUpRight className="w-4 h-4" />
                 </Link>
-                <Link
-                  to="/plans"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/40 text-white px-8 py-4 font-medium hover:bg-white/10 transition hover:-translate-y-0.5"
-                >
-                  View Our Plans
-                </Link>
-              </motion.div>
-            </motion.div>
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <Footer />
-      </div>
-    </>
+      {/* ── WHY US ── */}
+      <section className="py-28 bg-background">
+        <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary mb-3">Why Hirespirit</p>
+            <h2 className="text-4xl md:text-5xl font-semibold text-primary-deep">
+              A partner, not just a vendor.
+            </h2>
+            <p className="mt-6 text-muted-foreground leading-relaxed text-lg">
+              We think like a co-founder. Every engagement is scoped, priced and delivered
+              like a long-term partnership — not a one-off transaction.
+            </p>
+            <div className="mt-10 grid sm:grid-cols-2 gap-5">
+              {[
+                { icon: Layers, t: "Modular solutions", d: "Pick services à la carte or bundle industry suites." },
+                { icon: Zap, t: "Fast delivery", d: "Most websites live in 2–3 weeks, apps in 6–8." },
+                { icon: Shield, t: "You own everything", d: "Source code, hosting logins, admin — all yours." },
+                { icon: Sparkles, t: "Design-first", d: "Every product ships polished, not just functional." },
+              ].map((f) => (
+                <div key={f.t} className="flex gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <f.icon className="w-4 h-4 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-primary-deep">{f.t}</h4>
+                    <p className="text-sm text-muted-foreground mt-0.5">{f.d}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="rounded-3xl bg-emerald-gradient p-10 text-cream shadow-elegant relative overflow-hidden">
+              <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.4)_1px,transparent_0)] [background-size:24px_24px]" />
+              <div className="relative">
+                <div className="flex gap-0.5 text-cream mb-6">
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-cream" />)}
+                </div>
+                <blockquote className="text-xl md:text-2xl font-display leading-relaxed">
+                  "Hirespirit rebuilt our entire booking platform in three weeks.
+                  It runs faster, converts better, and I finally understand where every rupee went."
+                </blockquote>
+                <div className="mt-8 pt-6 border-t border-cream/15 flex items-center gap-4">
+                  <div className="w-11 h-11 rounded-full bg-cream flex items-center justify-center text-primary-deep font-semibold">R</div>
+                  <div>
+                    <div className="font-semibold">Rahul Verma</div>
+                    <div className="text-sm text-cream/60">Founder, Elevate Wellness</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="py-24 bg-background">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="rounded-3xl bg-emerald-gradient text-cream p-12 md:p-16 relative overflow-hidden">
+            <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-primary-glow/40 blur-3xl" />
+            <div className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-primary/40 blur-3xl" />
+            <div className="relative grid md:grid-cols-[1.5fr_1fr] gap-10 items-center">
+              <div>
+                <h2 className="text-4xl md:text-5xl font-semibold leading-tight">
+                  Ready to build your <span className="italic font-normal text-cream/90">next chapter?</span>
+                </h2>
+                <p className="mt-5 text-cream/70 text-lg max-w-lg">
+                  Tell us about your business — we'll come back with a proposal
+                  scoped, timelined and priced within 48 hours.
+                </p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <Link to="/contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-cream text-primary-deep px-7 py-4 font-medium shadow-elegant hover:-translate-y-0.5 transition-all">
+                  Start your project <ArrowUpRight className="w-4 h-4" />
+                </Link>
+                <Link to="/packages" className="inline-flex items-center justify-center gap-2 rounded-full border border-cream/25 px-7 py-4 font-medium hover:bg-cream/10 transition">
+                  View packages
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
   );
 }

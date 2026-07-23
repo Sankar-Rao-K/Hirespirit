@@ -1,0 +1,7 @@
+# If you change your domain in src/lib/site-config.ts, update the Sitemap
+# URL below (and the one in sitemap.xml) to match.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://hirespirit.com/sitemap.xml
